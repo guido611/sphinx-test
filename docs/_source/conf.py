@@ -14,11 +14,10 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-
 # -- Project information -----------------------------------------------------
 
-project = 'sphinx-test'
-copyright = '2019, Guido Drechsel'
+project = 'edaviz'
+copyright = '2019, 8080 Labs GmbH'
 author = 'Guido Drechsel'
 
 # The full version, including alpha/beta/rc tags
@@ -30,16 +29,15 @@ release = '0.0.1'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.githubpages'
-]
+extensions = ['sphinx.ext.githubpages', 'recommonmark']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
-# source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+#source_suffix = '.rst'
+source_suffix = ['.rst', '.md']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -57,7 +55,7 @@ html_theme = 'sphinx_rtd_theme'
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+#html_static_path = ['_static']
 
 # adapted from: http://rackerlabs.github.io/docs-rackspace/tools/rtd-tables.html
 # and

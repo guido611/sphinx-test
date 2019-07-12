@@ -20,7 +20,8 @@ git ls-files -z | xargs -0 rm -f
 
 # sync files from html build
 #rsync -r ../html/ ./
-robocopy ../html/ ./
+cp -R ../html/* ./
+touch .nojekyll
 
 # add commit, and push to github
 git add . --all

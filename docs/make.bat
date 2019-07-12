@@ -12,7 +12,27 @@ set BUILDDIR=_build
 
 if "%1" == "" goto help
 
-%SPHINXBUILD% >NUL 2>NUL
+if "%1" == "help" (
+	:help
+	%SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+	goto end
+)
+
+if "%1" == "clean" (
+	for /d %%i in (%BUILDDIR%\*) do rmdir /q /s %%i
+	del /q /s %BUILDDIR%\*
+	goto end
+)
+
+REM Check if sphinx-build is available and fallback to Python version if any
+%SPHINXBUILD% 1>NUL 2>NUL
+if errorlevel 9009 goto sphinx_python
+goto sphinx_ok
+
+:sphinx_python
+
+set SPHINXBUILD=python -m sphinx.__init__
+%SPHINXBUILD% 2> nul
 if errorlevel 9009 (
 	echo.
 	echo.The 'sphinx-build' command was not found. Make sure you have Sphinx
@@ -25,17 +45,15 @@ if errorlevel 9009 (
 	exit /b 1
 )
 
-if "%1" == "clean" (
-	for /d %%i in (%BUILDDIR%\*) do rmdir /q /s %%i
-	del /q /s %BUILDDIR%\*
+:sphinx_ok
+
+if "%1" == "html" (
+	%SPHINXBUILD% -b html %SOURCEDIR% %BUILDDIR%/html
+	if errorlevel 1 exit /b 1
+	echo.
+	echo.Build finished. The HTML pages are in %BUILDDIR%/html.
 	goto end
 )
-
-%SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
-goto end
-
-:help
-%SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 
 :end
 popd
